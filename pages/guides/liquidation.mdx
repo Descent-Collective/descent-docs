@@ -1,0 +1,118 @@
+This is first and immediate pattern used to maintain solvency and the peg of a currency to it's offchain representation. 
+Liquidation involves a third party paying off a borrowers position which is below the base health factor and getting a reward (liquidation bonus) in return for helping sustain the protocol.
+
+### Liquidation Threshold
+Liquidation threshold is very similar to the collateralisation ratio in the sense that they're both ratios (and can be the same value). It simply says, the point where we want anybody to be able to liquidate a position as the worth of it's collateral relative to the borrowed currency reduce. We want this to happen before we get under-collaterised so as to be able to incentivise liquidators.
+
+Take the example,
+
+```tsx
+Exchange rate: 1 USDC = 1,000 xNGN
+collateralisation ratio = 80%
+
+USER A deposits 100 USDC
+USER A can mint at most 80% xNGN worth of 100 USDC 
+    i.e 80 USDC * 1,000 (exchange rate) = 80,000 xNGN
+
+Liquidation Threshold = 80%
+USER A has borrowed 80,000 xNGN and has a collateral value of 100 USDC
+    - Position has 80% of debt so it cannot be liquidated
+
+Suddenly, the price of USDC to xNGN changes
+Exchange rate: 1 USDC = 999 xNGN
+
+Recalculating, the collateral is now worth
+999 * 100 = 99,900 xNGN
+
+And the new ratio is now
+ 80,000      100
+-------- *  -----   = 80.08008
+ 99,900       1
+``` 
+The position is now above the max threshold and now any body can liquidate it
+
+It is recommended to not borrow amounts that put your position too close to the liquidation threshold to avoid getting liquidated if a little fluctuation in price happens.
+
+### Health Factor
+The health factor of a vault basically tells us the current ratio of its collateral to it's debt (adjusted to the liquidation threshold). 
+
+This is very important invariant and it is checked and enforced at any point where the collateral value relative to the borrowed amount can go below the liquidation threshold based on user input. 
+This includes when borrowing a currency and when withdrawing already deposited collateral. It's also checked during liquidation to know if a position can be liquidated. The base value is 1 and anything below that can be liquidated.
+
+Take this example
+``` tsx
+Exchange rate: 1 USDC = 1,000 xNGN
+collateralisation ratio = 80%
+
+USER A deposits 100 USDC
+USER A can mint at most 80% xNGN worth of 100 USDC 
+    i.e 80 USDC * 1,000 (exchange rate) = 80,000 xNGN
+    
+
+Calculating health factor
+- adjustedCollateralValueInCurrency = (depositedCollateral * exchangeRate * liquidationThreshold) / 100
+- Health Factor = adjustedCollateralValueInCurrency / borrowedCurrency
+
+
+If we plug in USER A's vault info we get
+- adjustedCollateralValueInCurrency = (100 * 1,000 * 80) / 100 = 80,000
+- Health Factor = 80,000 / 80,000 = 1
+
+```
+
+We can see that the position is at the base health factor, 1, which we know is risky. A fluctuation in price will take it below 1 and hence can be liquidated. Let's see this in action
+
+Using the liqudiation example from earlier
+```tsx
+Exchange rate: 1 USDC = 999 xNGN
+Currency user ratio = 80.08008
+
+
+If we plug in USER A's current vault info we get
+- adjustedCollateralValueInCurrency = (100 * 999 * 80) / 100 = 79,920
+- Health Factor = 79,920 / 80,000 = 0.999
+
+Liquidatable!
+```
+The position can be liquidated because the health factor is below 1.
+
+### Liquidation Bonus
+When a liquidation happens, the liquidator earns some reward that scales proportional to the liquidated amount. 
+If the liquidation bonus is 10%, this means the liquidator would be able to get at most 10% more collateral after liquidation. This 10% comes from the borrower's collateral.
+
+### Now let's look at the full flow of a liquidation.
+
+```tsx
+**Parameters**
+- Liquidation threshold : 80%
+- Exchange rate : 1 USDC = 1,000 xNGN
+- Liquidation bonus/penalty : 10%
+- Base Health Factor : 1
+```
+
+* **USER A deposits 100 USDC**
+    * User A total Deposit : 100 USDC
+    * User A total Borrowed : 0 xNGN
+    * User A Health Factor : Infinity
+    * User A Ratio : Infinity
+
+* **User A borrows (mints) 80,000 xNGN**
+    * User A total Deposit : 100 USDC
+    * User A total Borrowed : 80,000 xNGN
+    * User A Health Factor : 1
+    * User A Ratio : 80%
+
+* **Exchange rate changes to 1 USDC = 990 xNGN**
+    * User A total Deposit : 100 USDC
+    * User A total Borrowed : 80,000 xNGN
+    * User A Health Factor : 0.99
+    * User A Ratio : 80.8080...%
+* User B sees the opportunity and liquidates / pays back User A's position
+    * User B pays 80,000 xNGN and gets 80.8080 USDC (i.e 80,000 xNGN / 990) plus 10% of that totalling 88.88 USDC.
+        * User A total Deposit : 11.12 USDC
+        * User A total Borrowed : 0 xNGN
+        * User A Health Factor : Infinity
+        * User A Ratio : Infinity
+
+
+Liquidations can also happen partially.

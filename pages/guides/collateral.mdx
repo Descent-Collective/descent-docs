@@ -1,0 +1,37 @@
+Collateral is any asset which a borrower must provide to take out a loan, acting as a security for the debt. Currently, Descent protocol only supports USDC as collateral.
+
+### Why Collateral is important?
+Collateral acts as a form of security for the protocol. In the event that a borrower's vault fall below a certain liquidation threshold, anybody can liquidate the collateral (pay back the borrower's debt)  and get a reward for it, reducing the risk of incurring bad debt by the protocol.
+
+### Supported collateral Assets
+Currently the collateral asset we support is USDC. 
+
+### How are collaterals added to the protocol?
+Adding new collaterals to the Descent protocol involves a careful evaluation and integration process. 
+
+Users or community members propose new collateral assets through a governance mechanism. This proposal typically includes information about the proposed asset, its use case, and potential benefits to the protocol.
+
+## Collateral Data structure
+### Collateralisation Ratio
+The collateralisation ratio determines the amount of Currency a borrower is allowed to mint relative to their deposited collateral. If the collateralisation ratio of currency xNGN with collateral USDC is 80%, this means that for every deposited USDC, the borrower can only mint at most least 80% xNGN worth of USDC.
+
+Take this example, 
+
+```tsx
+Exchange rate: 1 USDC = 1,000 xNGN
+collateralisation ratio = 80%
+
+USER A deposits 100 USDC
+USER A can mint at most 80% xNGN worth of 100 USDC 
+    i.e 80 USDC * 1,000 (exchange rate) = 80,000 xNGN
+```
+
+As you can imagine, this check is enforced when a borrower wants to borrow a currency. It is important to have this gap especially for volatile collateral or currencies to reduce the possibilities of a position suddenly being under-collaterised before liquidations can take place. This threshold would vary per collateral per currency as their volatility has to be put into consideration.
+
+### Minimum Collateral
+This is a parameter used to enforce a minimum collateral value a user can borrow a currency against. This is important to make sure positions are always profitable to liquidate after gas fees are considered. If a position of $1 has a health factor less than 1, if liquidated, the liquidator will get a profit of {'<='} $0.1. 
+If the current gas fees to do this is {'>='} $0.1, it won't likely get liquidated because there's no profit to be made.
+Setting the minimum collateral value a user can borrow a currency against to be a reasonably high amount prevents this and this parameter would vary per chain due to varying gas fees per chain.
+
+### Debt Ceiling
+This is set to cap the total amount of Currency that can be minted by all borrowers with a particular collateral at any given point in time. This helps manage the risk associated with a particular collateral.

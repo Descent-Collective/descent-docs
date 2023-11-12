@@ -1,0 +1,8 @@
+## Introduction
+The xNGN module is the user-facing ERC20 token contract maintaining the accounting for external xNGN balances. Most functions are standard for a token with changing supply. 
+
+The xNGN token uses the permit() function to provide offchain approvals, As the owner of an address, 
+you can use the permit() function to sign a permission that grants allowance to another address. The address that receives permission can then execute the transfer with the allocated allowance.
+
+For the most part, currency.sol functions as a typical ERC20 token. 
+These tokens have been already been heavily documented here and it is recommended to read through that documentation for the core functions of an ERC20 token.

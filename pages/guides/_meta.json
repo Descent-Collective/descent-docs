@@ -1,0 +1,10 @@
+{
+  "index": "👁 Protocol Overview",
+  "currency": "💲 Currency",
+  "vaults": "🏦 Descent vaults",
+  "collateral": "🥑 Collateral Module",
+  "liquidation": "📉 Liquidation Module",
+  "rates": "💰 Rates and Stability fees",
+  "system-stabilizer": "📊 System Stabilier",
+  "oracle": "🚰 Oracle Module"
+}

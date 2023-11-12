@@ -1,0 +1,49 @@
+### Contract Source - vault.sol
+
+## Introduction
+The Vault contract is the core Vault engine of Descent Protocol. It stores Vaults and tracks all the associated xNGN and Collateral balances. 
+It also defines the rules by which Vaults and balances can be manipulated. 
+The rules defined in the Vault contract are immutable, so in some sense, the rules in the Vault can be viewed as the guiding principle of the Vault Contract.
+Users are able to create individual vaults(debt positions) from the vault contract.
+
+### Core Principles
+* Currencies(xNGN) cannot exist without a collateral
+* Vault core contract never makes any external contract call
+* The vault core contracts are deployed for every new stablecoin created. i.e. The current vault contract only caters to xNGN
+
+### What is a Vault?
+A vault is where users maintain their loan positions. It is linked to a user address and a collateral address. 
+Vaults maintain two balances: one is an asset (USDC) acting as collateral and the other is a debt denominated in xNGN. 
+You can change the amount of each by adding collateral or repaying debt. As you make these balance changes, your Vault's collateral ratio changes accordingly.
+
+### Vaults Data Structure
+Every vault created has the following data structure:
+`depositedCollateral` - Represents the Locked Collateral in the system for a particular vault debt position
+`borrowedAmount` - Represents the amount of stable currencies borrowed for a given vault
+`accruedInterest` - Represents the total amount of unpaid accrued interest of the vault
+
+### Stability Fees (Borrow Fees)
+Every time you borrow xNGN from your Vault, a fee is charged on the borrowed amount and added to your debt. Please note that the borrowing fee is variable (and determined algorithmically) and has a minimum value of 0.5% under normal operation. The fee is 0% during Recovery Mode. 
+The stability fee is added to the debt of the Vault and is given by a baseRate . The fee rate is confined to a range(which can be set by governance) between 0.5% and 10% and is multiplied by the amount of liquidity drawn by the borrower.
+
+For example:
+1. **Initial Request**: The borrower wants to receive 50,000 xNGN to their wallet.
+2. **Borrowing Fee**: The borrowing fee stands at 0.5%. To calculate the borrowing fee, you take 0.5% of the amount borrowed. In this case, it's 0.005 * 50,000 xNGN, which equals 250.00 xNGN.
+3. **Total Debt**: The total debt is the initial requested amount plus the borrowing fee. So, it's 50,000 xNGN + 250.00 xNGN, which equals 50,250 xNGN.
+4. The borrower will incur a total debt of 50,250 xNGN, which includes the 50,000 xNGN they initially wanted to borrow plus the borrowing fee of 250.00 xNGN. This total debt needs to be repaid according to the terms and conditions of the lending platform or protocol.
+
+> Loans issued by the protocol do not have a repayment schedule. You can leave your vault open and repay your debt any time, as long as you maintain a collateral ratio of at least 110% keeping in mind that accrued interest might take the position below the liquidation threshold
+
+### Potential sources of failure
+
+**Coding Error**
+
+A flaw in the Vault's code could have severe consequences, potentially resulting in the loss or locking of all xNGN and Collateral within the system. It might render Vault modifications and xNGN transfers impossible, disrupt liquidations, and even impede a system shutdown.
+
+**Feeds**
+
+The Vault relies on trusted oracles to provide essential price data. If these price feeds malfunction, it could open the door for the minting of unbacked xNGN or unjust liquidation of safe Vaults.
+
+**Governance**
+
+Governance contracts have the power to authorize new modules within the Vault. This authorization could lead to malicious actions, including the theft of collateral or the minting of unbacked xNGN. In the absence of effective cryptoeconomic safeguards, the system becomes vulnerable, potentially enabling bad actors to drain collateral.

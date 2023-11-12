@@ -1,0 +1,37 @@
+The Descent Protocol requires real-time information about the market price of the collateral assets in Descent Vaults in order to know when to trigger Liquidations. 
+The protocol will derive it’s collateral price from the system’s oracle infrastructure that consists of individual nodes. $OSN voters choose a set of trusted Nodes to deliver price information to the system. They also control how many Nodes are in the set.
+
+The module has put in place mechanism to protect the system from attacks via the feed contract. 
+
+The Price Oracle module design system is based on these core principles:
+* 100% Decentralized system
+* Decentralized and trusted source of price
+* Protect the system from losing it’s data integrity
+* Nodes should be incentivised and punished for uploading correct and wrong data respectively
+
+This system is comprised of 4 major components:
+### Feed.sol
+
+The feed contract is responsible for reading and updating the price of collaterals from the oracle. It also puts in place a security module that ensures that the new value prices propagated are not updated until after a specified delay period has been passed. This contract reads the price from a median.sol contract. The feed contract will have one core function, updatePrice()
+
+### Median.sol
+
+The median contract is Descent’s trusted price reference. Every time a new list of prices is received, the median of these is computed and used to update the stored value. It stores a mapping of authorized nodes who are allowed to post price updates. These nodes will ideally be determined and updated via governance.
+The contract validates that the prices sent are by authorised nodes before updating values. 
+E.g. Let’s say this median contract needs a minimum of 10 sources, we would need to send it 10 signatures. It will then proceed to go through each of them and validate that whoever sent the the data has been authorised to do so.
+In the case of it being an authorized node, it will check if it signed the message with a timestamp that is greater than the last one. This is done for the purpose of ensuring that it is not a stale message.
+
+### Relayer Client
+
+The relayer client is responsible for collecting prices of collateral pair, validating it and sending it to the smart contract for extra validation and storing.
+
+### Ozi
+
+Ozi is a decentralized application designed to facilitate the distribution of signed price messages across a network of peer-to-peer nodes. These nodes ensure the reliability and security of price feeds used by the descent protocol
+
+**Key Features**
+* Peer-to-Peer Network: Ozi operates on a decentralized network of peer-to-peer nodes, reducing reliance on central authorities.
+* Signed Price Messages: All price messages are signed, ensuring authenticity and integrity.
+* Gossip-Sub Protocol: Ozi utilizes the gossip-sub protocol for efficient and scalable communication between nodes.
+
+Learn more about Ozi here.
