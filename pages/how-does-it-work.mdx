@@ -1,0 +1,25 @@
+Descent protocol works by allowing people borrow Naira stablecoins against any collateral asset.
+
+### Borrowing
+1. **Create and Collateralize a Vault**
+A user creates a Vault (Collateral Debt Position or CDP) and funds it with USDC and amount of collateral that will be used to generate xNGN. 
+Once funded, a Vault is considered collateralized.
+
+2. **Generate xNGN from the Collateralized Vault**
+The Vault owner initiates a transaction, and then confirms it in her non-custodial wallet in order to generate a 
+specific amount of xNGN in exchange for keeping her collateral locked in the Vault.
+
+### Paying Back
+1. **Pay Down the Debt and the Stability Fee**
+To retrieve a portion or all of the collateral, a Vault owner must pay down or completely pay back the xNGN she generated, 
+plus the Vault Fee that continuously accrues on the xNGN outstanding. The Vault Fee can only be paid in xNGN.
+
+2. **Withdraw Collateral**
+With the xNGN returned and the Vault Fee paid, the Vault owner can withdraw all or some of her collateral back to her wallet. 
+Once all xNGN is completely returned and all collateral is retrieved, the Vault remains empty until the owner chooses to make another deposit.
+
+## Who controls the system?
+Inside the Descent ecosystem, the native $OSN token allows token holders to influence certain aspects of the protocol such as:
+* What should the be the annual borrowing fee be (stability fee)?
+* How much collateral should be backing each Vault (collateralization ratio)?
+* Shutting down the protocol in the case of a flash crash of the value of USD/NGN or any other unforeseen situation (emergency shutdown)?

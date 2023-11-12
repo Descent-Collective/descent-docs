@@ -1,0 +1,27 @@
+@font-face {
+    src: url('/fonts/NBArchitektNeue/NBArchitektNeueRegular.otf') format('opentype');
+    font-family: 'NB Architekt Neue';
+    font-weight: normal;
+  }
+  
+  @font-face {
+    src: url('/fonts/AcidGrotesk/AcidGrotesk-Regular.otf') format('opentype');
+    font-family: 'Acid Grotesk';
+    font-weight: 400;
+  }
+  
+  @font-face {
+    src: url('/fonts/AcidGrotesk/AcidGrotesk-Medium.otf') format('opentype');
+    font-family: 'Acid Grotesk';
+    font-weight: 500;
+  }
+  
+  .graphiql-container * {
+    box-sizing: border-box;
+  
+    --sidebar-width: 60px;
+  }
+  
+  .graphiql-container .graphiql-sidebar button {
+    width: 44px !important;
+  }

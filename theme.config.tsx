@@ -1,8 +1,9 @@
 import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
+import { HeaderLogo } from "./components/Header";
 
 const config: DocsThemeConfig = {
-  logo: <span>Descent Docs</span>,
+  logo: <HeaderLogo />,
   project: {
     link: "https://github.com/Descent-Collective/",
   },
