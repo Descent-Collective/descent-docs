@@ -30,6 +30,18 @@ const config: DocsThemeConfig = {
       )}
       <meta name="twitter:site:domain" content="www.descentdao.com" />
       <meta name="twitter:url" content="https://www.descentdao.com" />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
 
       {"/* FONTS */"}
 
