@@ -1,0 +1,14 @@
+This module, as the name implies is in charge of helping the protocol stay solvent and stable. It has a couple of roles
+
+* It holds all fees earned by the protocol from borrowers,
+* The system stability module also has a cap on how much fees can be stored at a given point in time. 
+If this cap is exceeded, the excesses are used to buy the governance token $DSN which are in turn burnt!
+* In the case of a vault incurring bad debt or having a health factor below the base health factor, 
+it uses from these reserve of earned fees to liquidate the vault at a loss, in essence the reserve of fees is used to bail out the protocol if a vault is too low in debt to profit any liquidator liquidating it.
+* In the scenario where the fees reserve is insufficient to cover the bad debt, the system stability module can mint (after a governance proposal on it has passed) the governance token $DSN, sells it for the currency that is experiencing bad debt and uses this to cover the bad debt of the protocol.
+	
+![System stabilizer Diagram](/dsn.png "System stabilizer Diagram")
+
+From this, it can be noticed that governance token holders are incentivised to vote in favour of the progress of the protocol because, 
+good proposals limit bad debt and in turn attracts usage from customers which in turn pay fees which over time and at some cap can be burnt to further benefit the governance token holders. 
+They are incentivised to vote for safe collateral rates, liquidation thresholds, currency savings rate and other vital parameters as they have skin in the game/stake in the protocol.
