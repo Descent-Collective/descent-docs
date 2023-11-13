@@ -1,6 +1,7 @@
 import React from "react";
 import { DocsThemeConfig } from "nextra-theme-docs";
 import { HeaderLogo } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 const config: DocsThemeConfig = {
   logo: <HeaderLogo />,
@@ -12,12 +13,15 @@ const config: DocsThemeConfig = {
   },
   docsRepositoryBase: "https://github.com/Descent-Collective/descent-docs",
   footer: {
-    text: "Nextra Docs Template",
+    component: <Footer />,
   },
 
   primaryHue: {
     dark: 109,
     light: 100,
+  },
+  sidebar: {
+    defaultMenuCollapseLevel: 2,
   },
 };
 

@@ -6,7 +6,6 @@ import { DescentLogo } from "./Logo";
 import { styled } from "../stitches.config";
 
 export function HeaderLogo() {
-  const router = useRouter();
   const [opacity, setOpacity] = React.useState(0);
 
   const { theme: colorMode } = useTheme();
