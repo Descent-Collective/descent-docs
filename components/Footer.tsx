@@ -74,7 +74,7 @@ export const Footer = () => {
               <DescentLogo />
             </ExternalLink>
             <LogoSubText>
-              © Copyright 2023 Descent Labs Foundation
+              © Copyright 2023 Descent Foundation
               <br />
               All rights reserved.
             </LogoSubText>
