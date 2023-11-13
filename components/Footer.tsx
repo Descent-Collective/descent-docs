@@ -70,7 +70,7 @@ export const Footer = () => {
               justifyContent: "space-between",
             }}
           >
-            <ExternalLink href="https://sound.xyz">
+            <ExternalLink href="https://descentdao.com">
               <DescentLogo />
             </ExternalLink>
             <LogoSubText>

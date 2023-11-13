@@ -79,6 +79,10 @@ const config: DocsThemeConfig = {
       />
     </>
   ),
+  useNextSeoProps: () => ({ titleTemplate: "%s – descentdao.com" }),
+  editLink: {
+    text: "Edit this page on GitHub",
+  },
   logo: <HeaderLogo />,
   project: {
     link: "https://github.com/Descent-Collective/",
@@ -95,6 +99,7 @@ const config: DocsThemeConfig = {
     dark: 109,
     light: 100,
   },
+
   sidebar: {
     defaultMenuCollapseLevel: 2,
   },

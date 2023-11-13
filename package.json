@@ -29,9 +29,7 @@
     "react-dom": "^18.2.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.8",
-    "pretty-quick": "^3.1.3",
-    "prism-react-renderer": "^1.3.5",
-    "prismjs": "^1.29.0"
+    "pretty-quick": "^3.1.3"
   },
   "devDependencies": {
     "@codemirror/language": "^6.6.0",
@@ -41,10 +39,6 @@
     "@stitches/react": "^1.2.8",
     "@types/react": "^18.0.32",
     "clsx": "^1.2.1",
-    "graphiql": "^2.4.1",
-    "graphql": "^16.6.0",
-    "graphql-ws": "^5.12.1",
-    "isomorphic-fetch": "^3.0.0",
     "react-is": "^18.2.0",
     "react-string-replace": "^1.1.0",
     "zod": "3.21.4",

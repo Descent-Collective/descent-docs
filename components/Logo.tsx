@@ -1,13 +1,41 @@
-import React from "react";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "nextra-theme-docs";
 
 export const DescentLogo = () => {
   const { theme: colorMode } = useTheme();
+  const [width, setWidth] = useState<number>();
+  useEffect(() => {
+    function handleWindowSizeChange() {
+      setWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
+  const isMobile = width <= 768;
+
+  console.log(isMobile, "is mobile");
 
   return (
     <div>
-      {colorMode === "dark" ? (
+      {isMobile ? (
+        <svg
+          width="36"
+          height="40"
+          viewBox="0 0 36 40"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M25.6438 3.86302H5.91781V10.3793V10.4384V23.53H3.28767V36.4107H23.0137C26.6452 36.4107 29.589 33.4668 29.589 29.8354V16.6847C29.589 16.5546 29.5853 16.4253 29.5778 16.2971H32.2192V10.4384C32.2192 6.8069 29.2753 3.86302 25.6438 3.86302ZM32.8767 19.6438H35.5068L35.5069 10.4384C35.5069 4.99117 31.091 0.575348 25.6438 0.575348H2.63014V10.3793V10.4384V21.6162H0V39.6984H23.0137C28.4609 39.6984 32.8767 35.2826 32.8767 29.8354V19.6438Z"
+            fill="#BCFD00"
+          />
+        </svg>
+      ) : colorMode === "dark" ? (
         <svg
           width="163"
           height="48"
