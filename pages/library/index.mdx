@@ -41,11 +41,14 @@ const vaultInfo = descent.getVaultInfo(ownerAddress);
 
 ``` tsx
 console.log(
-  vault.collateralAmount, // amount of collateral tokens
-  vault.debtValue,        // amount of currency(xNGN) debt
-  vault.accruedFees, // amount of fees accrued for vault
-  vault.collateralizationRatio, // collateralValue / debt
-  vault.liquidationPrice  // vault becomes unsafe at this price
+      vault.depositedCollateral, // amount of collateral tokens deposited
+      vault.collateralLocked,  // amount of collateral locked in the system
+      vault.borrowedAmount, // amount of currency(xNGN) debt
+      vault.accruedFees, // amount of fees accrued by the vault
+      vault.currentCollateralRatio, // collateralValue  to debt ratio
+      vault.healthFactor, // vaults health factor to determine liquidatable status
+      vault.availableCollateral, // amount of collateral in the system available
+      vault.availablexNGN, // amount of xNGN in the system ready to be minted
 );
 ```
 In the next section, learn more about how to configure the Descent instance with `Descent.create`
