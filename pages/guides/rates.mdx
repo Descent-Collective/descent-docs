@@ -1,0 +1,31 @@
+Rates represents the (stability) fees paid by borrowers to the protocol. This helps the Currency maintain its expected peg. 
+The rates are a vital protocol setting that depending on it's value can increase/decrease demand.
+
+If the current rate for xNGN backed by USDC is 1% per annum, this means that if a borrower borrows 100,000 xNGN for a year, 
+they would have to pay a total of 101,000 xNGN (100,000 + 1,000 stability fee) to fully cover their debt. This does not take a year to reflect and infact is calculated on a per second basis onchain. This means that even without a price change, a vault's health factor can go below the base health factor and can be liquidated. 
+Borrowers are advised to check and be sure their position would not go below the base health factor before they intend to pay back.
+
+### Base Rate & Collateral Rate
+
+There are 2 types of rates used by the protocol; 
+- Base rate,
+- Collateral rate 
+
+The Base rate is a default rate charged for borrowing a given currency regardless of the collateral deposited. 
+The fees gotten from the base rate goes to the protocol and can be used for different incentives for the given currency's holders like a savings rate with interest {'<='} the Base rate etc. 
+
+The Collateral rate is dependent on the collateral and can vary. It's meant to represent the riskiness of a given collateral, i.e the more risky the collateral, the higher it's collateral rate should be. 
+The fees gotten from the collateral rate goes to the [Stability Module](http://docs.descentdao.com/guides/system-stabilizer) where it is kept and used to bail out the protocol in the case of bad debt. 
+
+This goes to show how the rate of a collateral should fully reflect it's volatility and risk so as to be able to cover any bad debt resulting from a sharp decline in the price of that collateral relative to it's currency.
+The rate charged to a borrower is a combination of the two rates associated with the currency-collateral pair they wish to borrow from. 
+For example, for xNGN - USDC, if the base rate is 1% per year and the collateral rate for USDC is 1.5% per year, a borrower would pay 2.5% per year on their borrowed value. If another collateral is available to borrow xNGN against, say Ether, and it's collateral rate is 5% (considering it's way more volatile than USDC), a borrower would pay 6% per year on their borrowed value.
+
+### Market Impact
+Change in rate for a currency-collateral pair can affect the demand and hence the price of the currency in question in the market. Say a xNGN - USDC pair exist and xNGN has a base rate of 1% while USDC has a collateral rate of 1.5% (totalling 2.5%) and everyone is okay with this rate. 
+
+If the total rate is increased to 5% suddenly, this would drive demand relative to supply as borrowers would want to buy xNGN and pay back their debt as they feel 5% is too much. 
+This would also remove xNGN from the market. 
+
+On the other hand, if the total rate was reduced to 1%, people would want to borrow more as the rate is relatively low, which means they would mint xNGN and thereby putting more xNGN into the market and reducing demand relative to supply.
+This actions can be used in the case where the currency in question loses its peg in any direction for any reason whatsoever.

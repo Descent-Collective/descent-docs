@@ -33,7 +33,7 @@ const ownerAddress = '0xf00...';
 
 const descent = await Descent.create('https', {
   url: `https://mainnet.infura.io/v3/${infuraKey}`
-  collateral: ['USDC']
+  collateral: 'USDC'
 });
 
 const vaultInfo = descent.getVaultInfo(ownerAddress);
@@ -42,8 +42,8 @@ const vaultInfo = descent.getVaultInfo(ownerAddress);
 ``` tsx
 console.log(
   vault.collateralAmount, // amount of collateral tokens
-  vault.collateralValue,  // value in USD, using current price feed values
   vault.debtValue,        // amount of currency(xNGN) debt
+  vault.accruedFees, // amount of fees accrued for vault
   vault.collateralizationRatio, // collateralValue / debt
   vault.liquidationPrice  // vault becomes unsafe at this price
 );
