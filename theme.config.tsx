@@ -10,7 +10,7 @@ const config: DocsThemeConfig = {
   chat: {
     link: "https://discord.com",
   },
-  docsRepositoryBase: "https://github.com/Descent-Collective/docs",
+  docsRepositoryBase: "https://github.com/Descent-Collective/descent-docs",
   footer: {
     text: "Nextra Docs Template",
   },

@@ -1,0 +1,51 @@
+## Installation
+
+Install the package with npm in your terminal:
+```tsx
+npm install @descent-protocol/js
+```
+Once it's installed, import the module into your project as shown below.
+```tsx
+import Descent from '@descent-protocol/js';
+// or
+const Descent = require('@descent-protocol/js');
+```
+
+### UMD
+This library is also usable as a UMD module, which you can build with `npm run build:frontend.`
+```html
+<script src="./descent.js" />
+
+<script>
+// once the script loads, window.Descent is available
+</script>
+```
+
+Quick examples
+
+### Look up information about a vault
+
+This code uses getVaultInfo to look up a vault that was created in the Descent protocol UI. Since this code is only reading data, not creating any transactions, it is not necessary to provide a private key or connect a wallet.
+``` tsx
+// you provide these values
+const infuraKey = 'your-infura-api-key';
+const ownerAddress = '0xf00...';
+
+const descent = await Descent.create('https', {
+  url: `https://mainnet.infura.io/v3/${infuraKey}`
+  collateral: ['USDC']
+});
+
+const vaultInfo = descent.getVaultInfo(ownerAddress);
+```
+
+``` tsx
+console.log(
+  vault.collateralAmount, // amount of collateral tokens
+  vault.collateralValue,  // value in USD, using current price feed values
+  vault.debtValue,        // amount of currency(xNGN) debt
+  vault.collateralizationRatio, // collateralValue / debt
+  vault.liquidationPrice  // vault becomes unsafe at this price
+);
+```
+In the next section, learn more about how to configure the Descent instance with `Descent.create`

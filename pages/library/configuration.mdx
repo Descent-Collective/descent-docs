@@ -1,0 +1,59 @@
+## Descent.create
+You can configure the behavior of descent.js by passing different arguments to Descent.create. The first argument is the name of a preset, and the second is an options object.
+
+### Presets
+* `'browser'`
+Use this preset when using the library in a browser environment. It will attempt to connect using window.ethereum or window.web3.
+
+* `'https'`
+Connect to a JSON-RPC node. Requires url to be set in the options.
+
+* `'test'`
+Use a local node (e.g. Ganache) running at http://127.0.0.1:2000, and sign transactions using node-managed keys.
+
+```tsx
+const descentBrowser = await Descent.create('browser');
+
+const descentHttp = await Descent.create('httpsRA_PROJECT_ID'
+});
+
+const descentTest = await Descent.create('test');
+```
+### Options
+* `privateKey`
+    * Optional. The private key used to sign transactions. If this is omitted, the first account available from the Ethereum provider will be used. Only used with the 'https' preset.
+    * If this is omitted and the provider does not have an unlocked account, the descent object will start in read-only mode.
+* `url`
+    * The URL of the node to connect to. Only used with the 'http' preset.
+
+* `ethereum.transactionSettings`
+    * Object containing transaction options to be applied to all transactions sent through the library.
+    * Default value: `{ gasLimit: 4000000 }`
+
+* `ethereum.confirmedBlockCount`
+    * Number of blocks to wait after a transaction has been mined when calling confirm.
+    * Default value: 5
+
+* `ethereum.inject`
+    * For advanced users. You can inject your own custom instance of a Web3 provider with this, instead of using the default HttpProvider.
+
+```tsx
+// It doesn't necessarily make sense to set all these
+// options at the same time (e.g. `url` and `inject`),
+// this is just meant to illustrate the shape of the
+// options object.
+const descent = await Descent.create('https', {
+  privateKey: YOUR_PRIVATE_KEY, // '0xabc...'
+  url: 'http://some-ethereum-rpc-node.net',
+  ethereum: {
+    confirmedBlockCount: 8
+    transactionSettings: {
+      gasPrice: 12000000000
+    },
+    inject: someProviderInstance
+  },
+});
+```
+
+### Read-only mode
+As mentioned above, the Descent instance can be used in read-only mode, if you just want to read data from the blockchain without signing any transactions. Simply omit the privateKey option.

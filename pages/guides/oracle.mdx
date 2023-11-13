@@ -10,11 +10,11 @@ The Price Oracle module design system is based on these core principles:
 * Nodes should be incentivised and punished for uploading correct and wrong data respectively
 
 This system is comprised of 4 major components:
-### Feed.sol
+### [Feed.sol](https://github.com/Descent-Collective/protocol-v1/blob/master/src/feed.sol)
 
 The feed contract is responsible for reading and updating the price of collaterals from the oracle. It also puts in place a security module that ensures that the new value prices propagated are not updated until after a specified delay period has been passed. This contract reads the price from a median.sol contract. The feed contract will have one core function, updatePrice()
 
-### Median.sol
+### [Median.sol](https://github.com/Descent-Collective/oracle-module/blob/main/src/median.sol)
 
 The median contract is Descent’s trusted price reference. Every time a new list of prices is received, the median of these is computed and used to update the stored value. It stores a mapping of authorized nodes who are allowed to post price updates. These nodes will ideally be determined and updated via governance.
 The contract validates that the prices sent are by authorised nodes before updating values. 
@@ -25,7 +25,7 @@ In the case of it being an authorized node, it will check if it signed the messa
 
 The relayer client is responsible for collecting prices of collateral pair, validating it and sending it to the smart contract for extra validation and storing.
 
-### Ozi
+### [Ozi](https://github.com/Descent-Collective/ozi)
 
 Ozi is a decentralized application designed to facilitate the distribution of signed price messages across a network of peer-to-peer nodes. These nodes ensure the reliability and security of price feeds used by the descent protocol
 
