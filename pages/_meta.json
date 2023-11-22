@@ -10,5 +10,8 @@
   },
   "library": {
     "title": "Building on top of the Descent Protocol"
+  },
+  "addresses": {
+    "title": "Deployment Addresses"
   }
 }
