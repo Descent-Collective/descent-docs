@@ -1,8 +1,8 @@
-This is first and immediate pattern used to maintain solvency and the peg of a currency to it's offchain representation. 
+This is the first and immediate pattern used to maintain solvency and the peg of a currency to it's offchain representation. 
 Liquidation involves a third party paying off a borrowers position which is below the base health factor and getting a reward (liquidation bonus) in return for helping sustain the protocol.
 
 ### Liquidation Threshold
-Liquidation threshold is very similar to the collateralisation ratio in the sense that they're both ratios (and can be the same value). It simply says, the point where we want anybody to be able to liquidate a position as the worth of it's collateral relative to the borrowed currency reduce. We want this to happen before we get under-collaterised so as to be able to incentivise liquidators.
+Liquidation threshold is very similar to the collateralization ratio in the sense that they're both ratios (and can be the same value). It simply says, the point where we want anybody to be able to liquidate a position as the worth of it's collateral relative to the borrowed currency reduce. We want this to happen before we get under-collateralized so as to be able to incentivize liquidators.
 
 Take the example,
 
@@ -29,7 +29,7 @@ And the new ratio is now
 -------- *  -----   = 80.08008
  99,900       1
 ``` 
-The position is now above the max threshold and now any body can liquidate it
+The position is now above the max threshold and now anybody can liquidate it
 
 It is recommended to not borrow amounts that put your position too close to the liquidation threshold to avoid getting liquidated if a little fluctuation in price happens.
 
@@ -62,7 +62,7 @@ If we plug in USER A's vault info we get
 
 We can see that the position is at the base health factor, 1, which we know is risky. A fluctuation in price will take it below 1 and hence can be liquidated. Let's see this in action
 
-Using the liqudiation example from earlier
+Using the liquidation example from earlier
 ```tsx
 Exchange rate: 1 USDC = 999 xNGN
 Currency user ratio = 80.08008
@@ -77,7 +77,7 @@ Liquidatable!
 The position can be liquidated because the health factor is below 1.
 
 ### Liquidation Bonus
-When a liquidation happens, the liquidator earns some reward that scales proportional to the liquidated amount. 
+When a liquidation happens, the liquidator earns some reward that scales proportionally to the liquidated amount. 
 If the liquidation bonus is 10%, this means the liquidator would be able to get at most 10% more collateral after liquidation. This 10% comes from the borrower's collateral.
 
 ### Now let's look at the full flow of a liquidation.
