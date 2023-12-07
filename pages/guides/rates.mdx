@@ -17,12 +17,12 @@ The fees gotten from the base rate goes to the protocol and can be used for diff
 The Collateral rate is dependent on the collateral and can vary. It's meant to represent the riskiness of a given collateral, i.e the more risky the collateral, the higher it's collateral rate should be. 
 The fees gotten from the collateral rate goes to the [Stability Module](http://docs.descentdao.com/guides/system-stabilizer) where it is kept and used to bail out the protocol in the case of bad debt. 
 
-This goes to show how the rate of a collateral should fully reflect it's volatility and risk so as to be able to cover any bad debt resulting from a sharp decline in the price of that collateral relative to it's currency.
+This goes to show how the rate of collateral should fully reflect it's volatility and risk so as to be able to cover any bad debt resulting from a sharp decline in the price of that collateral relative to it's currency.
 The rate charged to a borrower is a combination of the two rates associated with the currency-collateral pair they wish to borrow from. 
 For example, for xNGN - USDC, if the base rate is 1% per year and the collateral rate for USDC is 1.5% per year, a borrower would pay 2.5% per year on their borrowed value. If another collateral is available to borrow xNGN against, say Ether, and it's collateral rate is 5% (considering it's way more volatile than USDC), a borrower would pay 6% per year on their borrowed value.
 
 ### Market Impact
-Change in rate for a currency-collateral pair can affect the demand and hence the price of the currency in question in the market. Say a xNGN - USDC pair exist and xNGN has a base rate of 1% while USDC has a collateral rate of 1.5% (totalling 2.5%) and everyone is okay with this rate. 
+Change in rate for a currency-collateral pair can affect the demand and hence the price of the currency in question in the market. Say a xNGN - USDC pair exist and xNGN has a base rate of 1% while USDC has a collateral rate of 1.5% (totaling 2.5%) and everyone is okay with this rate. 
 
 If the total rate is increased to 5% suddenly, this would drive demand relative to supply as borrowers would want to buy xNGN and pay back their debt as they feel 5% is too much. 
 This would also remove xNGN from the market. 
