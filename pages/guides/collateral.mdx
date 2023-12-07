@@ -13,7 +13,7 @@ Users or community members propose new collateral assets through a governance me
 
 ## Collateral Data structure
 ### Collateralisation Ratio
-The collateralisation ratio determines the amount of Currency a borrower is allowed to mint relative to their deposited collateral. If the collateralisation ratio of currency xNGN with collateral USDC is 80%, this means that for every deposited USDC, the borrower can only mint at most least 80% xNGN worth of USDC.
+The collateralization ratio determines the amount of Currency a borrower is allowed to mint relative to their deposited collateral. If the collateralization ratio of currency xNGN with collateral USDC is 80%, this means that for every deposited USDC, the borrower can only mint at least 80% xNGN worth of USDC.
 
 Take this example, 
 
@@ -26,7 +26,7 @@ USER A can mint at most 80% xNGN worth of 100 USDC
     i.e 80 USDC * 1,000 (exchange rate) = 80,000 xNGN
 ```
 
-As you can imagine, this check is enforced when a borrower wants to borrow a currency. It is important to have this gap especially for volatile collateral or currencies to reduce the possibilities of a position suddenly being under-collaterised before liquidations can take place. This threshold would vary per collateral per currency as their volatility has to be put into consideration.
+As you can imagine, this check is enforced when a borrower wants to borrow a currency. It is important to have this gap especially for volatile collateral or currencies to reduce the possibilities of a position suddenly being under-collateralized before liquidations can take place. This threshold would vary per collateral per currency as their volatility has to be put into consideration.
 
 ### Minimum Collateral
 This is a parameter used to enforce a minimum collateral value a user can borrow a currency against. This is important to make sure positions are always profitable to liquidate after gas fees are considered. If a position of $1 has a health factor less than 1, if liquidated, the liquidator will get a profit of {'<='} $0.1. 

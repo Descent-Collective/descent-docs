@@ -17,8 +17,8 @@ The feed contract is responsible for reading and updating the price of collatera
 ### [Median.sol](https://github.com/Descent-Collective/oracle-module/blob/main/src/median.sol)
 
 The median contract is Descent’s trusted price reference. Every time a new list of prices is received, the median of these is computed and used to update the stored value. It stores a mapping of authorized nodes who are allowed to post price updates. These nodes will ideally be determined and updated via governance.
-The contract validates that the prices sent are by authorised nodes before updating values. 
-E.g. Let’s say this median contract needs a minimum of 10 sources, we would need to send it 10 signatures. It will then proceed to go through each of them and validate that whoever sent the the data has been authorised to do so.
+The contract validates that the prices sent are by authorized nodes before updating values. 
+E.g. Let’s say this median contract needs a minimum of 10 sources, we would need to send it 10 signatures. It will then proceed to go through each of them and validate that whoever sent the data has been authorized to do so.
 In the case of it being an authorized node, it will check if it signed the message with a timestamp that is greater than the last one. This is done for the purpose of ensuring that it is not a stale message.
 
 ### Relayer Client
