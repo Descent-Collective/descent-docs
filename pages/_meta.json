@@ -8,6 +8,9 @@
   "guides": {
     "title": "Smart Contract Guides"
   },
+  "governance": {
+    "title": "Governance of the Descent Protocol"
+  },
   "library": {
     "title": "Building on top of the Descent Protocol"
   },
