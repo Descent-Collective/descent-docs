@@ -100,8 +100,10 @@ const config: DocsThemeConfig = {
     light: 100,
   },
 
+
   sidebar: {
     defaultMenuCollapseLevel: 2,
+    
   },
 };
 
