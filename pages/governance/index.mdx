@@ -1,0 +1,23 @@
+
+### Use of the DSN Token in Descent Governance
+The DSN token is the governance token of the Descent Protocol that allows those who hold it to vote on changes to the Descent Protocol. 
+Note that anyone, not only DSN holders, can submit proposals for a vote.
+
+DSN token holders bear the risk of the protocol. Stakeholders contribute in more tangible ways to the protocol, usually in the form of technical integration (DeFi Front End, Keepers, integrations etc.) or financial participation (Liquidity Provider). 
+Both have some expectations for the protocol behaviour, safety and functionality.
+
+### Risk Parameters controlled by Descent Governance
+
+Each Descent Vault type (e.g., USDC/xNGN Vault) has its own unique set of Risk Parameters that enforce usage. The parameters are determined based on the risk profile of the collateral, and are directly controlled by DSN holders through voting.
+
+#### The Key Risk Parameters for Descent Vaults are:
+
+- **Debt Ceiling:** This is the highest total amount of currency all users can collectively borrow for a particular vault type. This helps in controlling the total supply of a particular currency.
+- **Stability Fee:** The Stability Fee is an annual percentage yield calculated on top of how much Currency(xNGN) has been generated against a Vault’s collateral. The fee is paid in xNGN only, and then sent into the Descent Buffer.
+- **Liquidation Threshold:** The specific collateral ratio at which a vault can be liquidated. A high Liquidation Threshold means Descent Governance expects low price volatility of the collateral; a low Liquidation Ratio means high volatility is expected.
+- **Liquidation Penalty:** This is a charge applied to a vault's collateral when it exceeds the liquidation threshold and a liquidation occurs. The Liquidation Penalty is used to encourage Vault owners to keep appropriate collateral levels.
+- **Debt floor per position:** This is the least amount of collateral a vault needs to borrow currency.
+
+Any voter-approved modifications to the governance variables of the Protocol will likely not take effect immediately in the future; rather, they could be delayed by as much as 24 hours if voters choose to activate the Governance Security Module (GSM). 
+
+The delay would give DSN holders the opportunity to protect the system, if necessary, against a malicious governance proposal (e.g., a proposal that alters collateral parameters contrary to established monetary policies or that allows for security mechanisms to be disabled) by triggering a Shutdown.
